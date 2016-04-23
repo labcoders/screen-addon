@@ -17,33 +17,41 @@
   Notice that a pixel is coded on six bits. Hence, four pixels are coded on three bytes.
 */
 
-#define BANG_PIXEL(p)       digitalWrite(PIN_R_HI, (p & 128)); \
-                            digitalWrite(PIN_R_LO, (p & 64)); \
-                            digitalWrite(PIN_G_HI, (p & 32)); \
-                            digitalWrite(PIN_G_LO, (p & 16)); \
-                            digitalWrite(PIN_B_HI, (p & 8)); \
-                            digitalWrite(PIN_B_LO, (p & 4)); \
-                            delay(1); \
-                            digitalWrite(PIN_R_HI, (p & 2)); \
-                            digitalWrite(PIN_R_LO, (p & 1));
-#define BANG_PIXEL_2(q)     digitalWrite(PIN_G_HI, (q & 128)); \
-                            digitalWrite(PIN_G_LO, (q & 64)); \
-                            digitalWrite(PIN_B_HI, (q & 32)); \
-                            digitalWrite(PIN_B_LO, (q & 16)); \
-                            delay(1); \
-                            digitalWrite(PIN_R_HI, q & 8); \
-                            digitalWrite(PIN_R_LO, q & 4); \
-                            digitalWrite(PIN_G_HI, q & 2); \
-                            digitalWrite(PIN_G_LO, q & 1);
-#define BANG_PIXEL_3(r)     digitalWrite(PIN_B_HI, r & 128); \
-                            digitalWrite(PIN_B_LO, r & 64); \
-                            delay(1); \
-                            digitalWrite(PIN_R_HI, r & 32); \
-                            digitalWrite(PIN_R_LO, r & 16); \
-                            digitalWrite(PIN_G_HI, r & 8); \
-                            digitalWrite(PIN_G_LO, r & 4); \
-                            digitalWrite(PIN_B_HI, r & 2); \
-                            digitalWrite(PIN_B_LO, r & 1);
+// Byte 1
+#define BANG_PIXEL_1(p)           digitalWrite(PIN_R_HI, (p & 128)); \
+                                  digitalWrite(PIN_R_LO, (p & 64)); \
+                                  digitalWrite(PIN_G_HI, (p & 32)); \
+                                  digitalWrite(PIN_G_LO, (p & 16)); \
+                                  digitalWrite(PIN_B_HI, (p & 8)); \
+                                  digitalWrite(PIN_B_LO, (p & 4)); \
+                                  delay(1);
+
+// Byte 1 then byte 2
+#define BANG_PIXEL_2p1(p)         digitalWrite(PIN_R_HI, (p & 2)); \
+                                  digitalWrite(PIN_R_LO, (p & 1));
+#define BANG_PIXEL_2p2(q)         digitalWrite(PIN_G_HI, (q & 128)); \
+                                  digitalWrite(PIN_G_LO, (q & 64)); \
+                                  digitalWrite(PIN_B_HI, (q & 32)); \
+                                  digitalWrite(PIN_B_LO, (q & 16)); \
+                                  delay(1);
+
+// Byte 2 then byte 3 
+#define BANG_PIXEL_3p1(q)         digitalWrite(PIN_R_HI, q & 8); \
+                                  digitalWrite(PIN_R_LO, q & 4); \
+                                  digitalWrite(PIN_G_HI, q & 2); \
+                                  digitalWrite(PIN_G_LO, q & 1);
+#define BANG_PIXEL_3p2(r)         digitalWrite(PIN_B_HI, r & 128); \
+                                  digitalWrite(PIN_B_LO, r & 64); \
+                                  delay(1);
+
+// Byte 3
+#define BANG_PIXEL_4(r)           digitalWrite(PIN_R_HI, r & 32); \
+                                  digitalWrite(PIN_R_LO, r & 16); \
+                                  digitalWrite(PIN_G_HI, r & 8); \
+                                  digitalWrite(PIN_G_LO, r & 4); \
+                                  digitalWrite(PIN_B_HI, r & 2); \
+                                  digitalWrite(PIN_B_LO, r & 1);
+
 #define HSYNC_BACKPORCH_MICROS 336
 #define HSYNC_PULSE_MICROS 672
 #define HSYNC_FRONTPORCH_MICROS 112
